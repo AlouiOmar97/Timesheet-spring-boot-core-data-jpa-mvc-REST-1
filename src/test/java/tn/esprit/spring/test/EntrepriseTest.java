@@ -36,7 +36,7 @@ public class EntrepriseTest {
     @Before
     public void createEntreprise(){
         l.info("before Create Entreprise");
-        Entreprise entreprise=new Entreprise("dalicode","ariana");
+        Entreprise entreprise=new Entreprise("Znetit","sfax");
         idEntreprise=iEntrepriseservice.ajouterEntreprise(entreprise);
       
     }
