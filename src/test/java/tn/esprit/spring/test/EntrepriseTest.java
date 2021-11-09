@@ -35,31 +35,30 @@ public class EntrepriseTest {
 
     @Before
     public void createEntreprise(){
-        System.out.println("before Create Entreprise");
+        l.info("before Create Entreprise");
         Entreprise entreprise=new Entreprise("dalicode","ariana");
         idEntreprise=iEntrepriseservice.ajouterEntreprise(entreprise);
       
     }
 
-
     @Test
     public void testAjouterEntreprise() {
     	
-        System.out.println("ajouter entreprise");
+    	l.info("ajouter entreprise");
         assertTrue(idEntreprise>0);
     }
 
     @Test
     public void testgetEntreprise() {
 
-        System.out.println("get entreprise by id");
+    	l.info("get entreprise by id");
         Entreprise entreprise= iEntrepriseservice.getEntrepriseById(idEntreprise);
         assertNotNull(entreprise);
     }
 
     @After()
     public  void deleteEntreprise(){
-        System.out.println("Delete after");
+    	l.info("Delete after");
         iEntrepriseservice.deleteEntrepriseById(idEntreprise);
     }
 
