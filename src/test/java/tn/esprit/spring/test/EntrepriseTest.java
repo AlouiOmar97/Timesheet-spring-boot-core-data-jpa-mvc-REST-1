@@ -7,18 +7,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.spring.config.LoggingAspect;
-import tn.esprit.spring.entities.Employe;
-import tn.esprit.spring.entities.Role;
 
-import tn.esprit.spring.services.EmployeServiceImpl;
-import tn.esprit.spring.services.IEmployeService;
+import tn.esprit.spring.entities.Entreprise;
 
+import tn.esprit.spring.services.IEntrepriseService;
+
+import static org.assertj.core.api.Assertions.not;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -27,36 +26,35 @@ import org.apache.logging.log4j.Logger;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class EmployeTest {
+public class EntrepriseTest {
     private static final Logger l = LogManager.getLogger(LoggingAspect.class);
     @Autowired
-    IEmployeService iemployeservice;
-    private int idEmploye;
+    IEntrepriseService iEntrepriseservice;
+    private int idEntreprise;
 
 
     @Before
-    public void createEmploye(){
-        System.out.println("before insert");
-        Employe employe=new Employe("Aloui","Omar","omar.aloui@esprit.tn",true, Role.INGENIEUR);
-        l.info("testing adding employe");
-        idEmploye=iemployeservice.ajouterEmploye(employe);
-        //test
+    public void createEntreprise(){
+        System.out.println("before Create Entreprise");
+        Entreprise entreprise=new Entreprise("dalicode","ariana");
+        idEntreprise=iEntrepriseservice.ajouterEntreprise(entreprise);
+      
     }
 
 
     @Test
-    public void testAjouterEmploye() {
-
-        System.out.println("ajout employe");
-        assertTrue(idEmploye>0);
+    public void testAjouterEntreprise() {
+    	
+        System.out.println("ajouter entreprise");
+        assertTrue(idEntreprise>0);
     }
 
     @Test
-    public void testModifierEmploye() {
+    public void testgetEntreprise() {
 
-        System.out.println("modifier employe");
-        iemployeservice.mettreAjourEmailByEmployeId("b@b",idEmploye);
-        //assertTrue(idEmploye>0);
+        System.out.println("get entreprise by id");
+        Entreprise entreprise= iEntrepriseservice.getEntrepriseById(idEntreprise);
+        assertNotNull(entreprise);
     }
 
 
@@ -101,9 +99,9 @@ public class EmployeTest {
 
 
     @After()
-    public  void deleteEmploye(){
+    public  void deleteEntreprise(){
         System.out.println("Delete after");
-        iemployeservice.deleteEmployeById(idEmploye);
+        iEntrepriseservice.deleteEntrepriseById(idEntreprise);
     }
 
 
